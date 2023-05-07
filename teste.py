@@ -1,38 +1,64 @@
-import random
-import math
+import random                           # gerador de números aleatórios
+import simpy                            # biblioteca de simulação
 
-# Configuração da simulação
-tempo_total = 1000
-chegada_media = 5
-atendimento_media = 4
+# tempo médio entre chegadas sucessivas de clientes
+TEMPO_MEDIO_CHEGADAS = 0.5
+TEMPO_MEDIO_ATENDIMENTO = 0.5           # tempo médio de atendimento no servidor
 
-# Inicialização das variáveis
-tempo_atual = 0
-fila = []
-atendidos = []
-prox_chegada = random.expovariate(1/chegada_media)
-prox_atendimento = math.inf
+# lista de clientes que passaram pelo sistema
+clientesLista = []
 
-# Simulação
-while tempo_atual < tempo_total:
-    if prox_chegada < prox_atendimento:
-        tempo_atual = prox_chegada
-        if len(fila) == 0:
-            prox_atendimento = tempo_atual + \
-                random.expovariate(1/atendimento_media)
-        fila.append(tempo_atual)
-        prox_chegada = tempo_atual + random.expovariate(1/chegada_media)
-    else:
-        tempo_atual = prox_atendimento
-        atendidos.append(tempo_atual)
-        if len(fila) == 0:
-            prox_atendimento = math.inf
-        else:
-            prox_atendimento = tempo_atual + \
-                random.expovariate(1/atendimento_media)
-            fila.pop(0)
 
-# Resultados
-tempo_medio_fila = sum([atendimento - chegada for chegada,
-                       atendimento in zip(fila, atendidos)]) / len(atendidos)
-print("Tempo médio de fila:", tempo_medio_fila)
+def geraChegadas(env):
+    # função que cria chegadas de entidades no sistema
+    contaChegada = 0
+    while True:
+        # aguardo um intervalo de tempo exponencialmente distribuído
+        yield env.timeout(random.expovariate(1.0/TEMPO_MEDIO_CHEGADAS))
+        contaChegada += 1
+        print('%.1f Chegada do cliente %d' % (env.now, contaChegada))
+
+        # inicia o processo de atendimento
+        env.process(atendimentoServidor(env, "cliente %d" %
+                    contaChegada, servidorRes))
+
+
+def atendimentoServidor(env, nome, servidorRes):
+    # função que ocupa o servidor e realiza o atendimento
+    # solicita o recurso servidorRes
+    request = servidorRes.request()
+
+    # aguarda em fila até a liberação do recurso e o ocupa
+    yield request
+    print('%.1f Servidor inicia o atendimento do %s' % (env.now, nome))
+
+    # registra o momento em que o cliente começou a ser atendido
+    momento_atendimento = env.now
+
+    # aguarda um tempo de atendimento exponencialmente distribuído
+    yield env.timeout(random.expovariate(1.0/TEMPO_MEDIO_ATENDIMENTO))
+    print('%.1f Servidor termina o atendimento do %s' % (env.now, nome))
+
+    # calcula o tempo de espera do cliente
+    tempo_espera = env.now - momento_atendimento
+
+    # adiciona o cliente à lista de clientes
+    clientesLista.append({'nome': nome, 'tempo_espera': tempo_espera})
+
+    # libera o recurso servidorRes
+    yield servidorRes.release(request)
+
+
+# semente do gerador de números aleatórios
+random.seed()
+env = simpy.Environment()                       # cria o environment do modelo
+servidorRes = simpy.Resource(env, capacity=1)   # cria o recurso servidorRes
+# incia processo de geração de chegadas
+env.process(geraChegadas(env))
+
+env.run(until=50)                                # executa o modelo por 5 min
+
+# calcula e imprime o tempo médio de espera dos clientes
+tempo_medio_espera = sum(c['tempo_espera']
+                         for c in clientesLista) / len(clientesLista)
+print(f'Tempo médio de espera: {tempo_medio_espera:.2f}')
