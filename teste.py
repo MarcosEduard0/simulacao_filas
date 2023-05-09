@@ -10,7 +10,7 @@ print("\nTempo de chegada | Tipo de evento | Número de amostras\n")
 n = 0
 simul_time = 0
 
-for i in range(num_samples):
+for total in range(1, num_samples+1):
     arrival_time = np.random.exponential(scale=mean_arrival_time)
     departure_time = np.random.exponential(scale=mean_departure_time)
 
@@ -32,3 +32,4 @@ print(f"\nNúmero de amostras na fila ao final da simulação: {n}")
 print(f"Tempo total da simulação: {simul_time:.4f}")
 print(
     f"Tempo médio de espera na fila: {(simul_time/num_samples - mean_arrival_time):.4f}")
+print(f"Número total de clientes que passaram pelo sistema: {total}")
