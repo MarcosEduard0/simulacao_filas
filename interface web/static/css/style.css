@@ -1,0 +1,28 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100px;
+    background:#1c4e6b;
+}
+.header.title{
+    font-size:30px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    color:white;}
