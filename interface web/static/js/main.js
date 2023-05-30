@@ -40,6 +40,8 @@ function chamarSimulacao1() {
             document.getElementById("Lq_Sim1").innerHTML = response['avg_clients_in_line'];
             document.getElementById("W_Sim1").innerHTML = response['avg_system_time'];
             document.getElementById("Wq_Sim1").innerHTML = response['avg_waiting_time'];
+            document.getElementById("E_Sim1").innerHTML = response['avg_waiting_time'];
+            document.getElementById("S_Sim1").innerHTML = response['avg_number_of_departure'];
             $('#loading1').html('Rodar simulação 1');
         },
         error: function (xhr) {
@@ -65,6 +67,8 @@ function chamarSimulacao2() {
             document.getElementById("Lq_Sim2").innerHTML = response['avg_clients_in_line'];
             document.getElementById("W_Sim2").innerHTML = response['avg_system_time'];
             document.getElementById("Wq_Sim2").innerHTML = response['avg_waiting_time'];
+            document.getElementById("E_Sim2").innerHTML = response['avg_waiting_time'];
+            document.getElementById("S_Sim2").innerHTML = response['avg_number_of_departure'];
             $('#loading2').html('Rodar simulação 2');
         },
         error: function (xhr) {

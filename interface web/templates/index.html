@@ -13,7 +13,6 @@
 </header>
 
 <body>
-
     <form class="container my-5" name="myForm">
         <div class="row g-2 col-md-6 offset-md-3">
             <div class="input-group mb-3">
@@ -75,45 +74,149 @@
                 simulação 2</button>
         </div>
         <p>
-            <hr>
-        <h2 style="text-align-last: center;">Resultados</h2>
-        <table class="table table-striped-columns">
-            <tr>
-                <th> Resultado </th>
-                <th> Valor Analítico </th>
-                <th> Valor Simulador 1</th>
-                <th> Valor Simulador 2</th>
-            </tr>
-            <tr>
-                <td> Clientes no sistema (L) </td>
-                <td id="L_Ana"> </td>
-                <td id="L_Sim1"> </td>
-                <td id="L_Sim2"> </td>
-                </td>
-            </tr>
-            <tr>
-                <td> Clientes na fila (L<sub>q</sub>) </td>
-                <td id="Lq_Ana"> </td>
-                <td id="Lq_Sim1"> </td>
-                <td id="Lq_Sim2"> </td>
-                </td>
-            </tr>
-            <tr>
-                <td> Tempo no sistema (W) </td>
-                <td id="W_Ana"></td>
-                <td id="W_Sim1"></td>
-                <td id="W_Sim2"></td>
-                </td>
-            </tr>
-            <tr>
-                <td> Tempo na fila (W<sub>q</sub>) </td>
-                <td id="Wq_Ana"></td>
-                <td id="Wq_Sim1"> </td>
-                <td id="Wq_Sim2"></td>
-                </td>
-            </tr>
-        </table>
     </form>
+
+    <hr>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Resultados</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table table-striped-columns">
+                            <tr>
+                                <th> Resultado </th>
+                                <th> Valor Analítico </th>
+                                <th> Valor Simulador 1</th>
+                                <th> Valor Simulador 2</th>
+                            </tr>
+                            <tr>
+                                <td> Clientes no sistema (L) </td>
+                                <td id="L_Ana"> </td>
+                                <td id="L_Sim1"> </td>
+                                <td id="L_Sim2"> </td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Clientes na fila (L<sub>q</sub>) </td>
+                                <td id="Lq_Ana"> </td>
+                                <td id="Lq_Sim1"> </td>
+                                <td id="Lq_Sim2"> </td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Tempo no sistema (W) </td>
+                                <td id="W_Ana"></td>
+                                <td id="W_Sim1"></td>
+                                <td id="W_Sim2"></td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Tempo na fila (W<sub>q</sub>) </td>
+                                <td id="Wq_Ana"></td>
+                                <td id="Wq_Sim1"> </td>
+                                <td id="Wq_Sim2"></td>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Outros</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table table-striped-columns">
+                            <tr>
+                                <th> </th>
+                                <th> Valor Simulador 1</th>
+                                <th> Valor Simulador 2</th>
+                            </tr>
+                            <tr>
+                                <td> Quant. Média de Entrada </td>
+                                <td id="E_Sim1"> </td>
+                                <td id="E_Sim2"> </td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Quant. Média de Saída</td>
+                                <td id="S_Sim1"> </td>
+                                <td id="S_Sim2"> </td>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Time Line</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Tempo atual</th>
+                                    <th>Tempo desde última chegada</th>
+                                    <th>Tempo desde última saída</th>
+                                    <th>Tempo de cliente na fila</th>
+                                    <th>Tempo de cliente no sistema</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1001</th>
+                                    <td>Mark Otto</td>
+                                    <td>Japan</td>
+                                    <td>$3000</td>
+                                    <td>$1200</td>
+                                    <td>$1200</td>
+                                    <td>
+                                        <a class="btn btn-success">Chegada</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">1001</th>
+                                    <td>Mark Otto</td>
+                                    <td>Japan</td>
+                                    <td>$3000</td>
+                                    <td>$1200</td>
+                                    <td>$1200</td>
+                                    <td><a class="btn btn-warning">Saída</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
