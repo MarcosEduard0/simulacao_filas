@@ -26,7 +26,11 @@
             <div class="input-group mb-3">
                 <div class="form-floating">
                     <input type="number" class="form-control" id="sample_size" value="1">
-                    <label for="floatingInputGrid">Número de rodadas na simulação</label>
+                    <label for="floatingInputGrid">Número de simulação</label>
+                </div>
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="initial_customers" value="0">
+                    <label for="floatingInputGrid">Número inicial de clientes (C)</label>
                 </div>
             </div>
         </div>
@@ -122,6 +126,27 @@
                                 <td id="Wq_Sim2"></td>
                                 </td>
                             </tr>
+                            <tr>
+                                <td> Periodo ocupado (B) </td>
+                                <td id="B_Ana"></td>
+                                <td id="B_Sim1"> </td>
+                                <td id="B_Sim2"></td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Periodo ocupado generalizado (B<sub>c</sub>)</td>
+                                <td id="Bc_Ana"></td>
+                                <td id="Bc_Sim1"> </td>
+                                <td id="Bc_Sim2"></td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Clientes na fila até sobrar 1 (U<sub>c</sub>)</td>
+                                <td id="Uc_Ana"></td>
+                                <td id="Uc_Sim1"> </td>
+                                <td id="Uc_Sim2"></td>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -189,24 +214,24 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">1001</th>
-                                    <td>Mark Otto</td>
-                                    <td>Japan</td>
-                                    <td>$3000</td>
-                                    <td>$1200</td>
-                                    <td>$1200</td>
+                                    <th scope="row">0</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
                                     <td>
                                         <a class="btn btn-success">Chegada</a>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <th scope="row">1001</th>
-                                    <td>Mark Otto</td>
-                                    <td>Japan</td>
-                                    <td>$3000</td>
-                                    <td>$1200</td>
-                                    <td>$1200</td>
+                                    <th scope="row">1</th>
+                                    <td>0.5</td>
+                                    <td>0.5</td>
+                                    <td>0.0</td>
+                                    <td>0.5</td>
+                                    <td>0.5</td>
                                     <td><a class="btn btn-warning">Saída</a></td>
                                 </tr>
                             </tbody>

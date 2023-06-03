@@ -16,9 +16,10 @@ def calcular_simulador1():
     simulation_total_time = int(request.form.get('total_time'))
     sample_size = int(request.form.get('sample_size'))
     deterministic = bool(int(request.form.get('deterministic')))
+    initial_customers = int(request.form.get('initial_customers'))
 
     data = rodadas_simulacao(
-        lambda_, mi_, simulation_total_time, sample_size, deterministic, simulador_1)
+        lambda_, mi_, simulation_total_time, sample_size, deterministic, initial_customers, simulador_1)
 
     return data
 
@@ -30,9 +31,10 @@ def calcular_simulador2():
     simulation_total_time = int(request.form.get('total_time'))
     sample_size = int(request.form.get('sample_size'))
     deterministic = bool(int(request.form.get('deterministic')))
+    initial_customers = int(request.form.get('initial_customers'))
 
     data = rodadas_simulacao(
-        lambda_, mi_, simulation_total_time, sample_size, deterministic, simulador_2)
+        lambda_, mi_, simulation_total_time, sample_size, deterministic, initial_customers, simulador_2)
 
     return data
 
