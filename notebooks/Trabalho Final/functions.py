@@ -23,8 +23,6 @@ def simulador(lambda_=1, mi_=2, tempo_total_simulacao=10000, deterministico=Fals
             num_chegadas += 1
             tempo_clientes_sistema.append(
                 (tempo_simulacao - last_event_time) * n)
-            tempo_clientes_fila.append(
-                (tempo_simulacao - last_event_time) * len(clientes_fila))
             chegadas.append(tempo_simulacao)
             n += 1
 
@@ -37,11 +35,10 @@ def simulador(lambda_=1, mi_=2, tempo_total_simulacao=10000, deterministico=Fals
             tempo_simulacao += tempo_saida
             tempo_clientes_sistema.append(
                 (tempo_simulacao - last_event_time) * n)
-            tempo_clientes_fila.append(
-                (tempo_simulacao - last_event_time) * len(clientes_fila))
 
             if len(clientes_fila):
-                clientes_fila.pop(0)
+                tempo_clientes_fila.append(
+                    tempo_simulacao - clientes_fila.pop(0))
 
             tempo_espera_sistema.append(tempo_simulacao - chegadas.pop(0))
             tempo_ocupado_servidor += tempo_saida
@@ -92,7 +89,7 @@ def geo(p, k):
 def valor_analitico(lambda_, mu_):
     if lambda_ < mu_:
         W = 1/(mu_-lambda_)
-        Wq = W - (1/mu_)
+        Wq = lambda_/(mu_*(mu_-lambda_))
         L = lambda_*W
         Lq = lambda_*Wq
     else:
@@ -103,7 +100,7 @@ def valor_analitico(lambda_, mu_):
 
     Rho = min(1, lambda_/mu_)
 
-    return [L, Lq, W, W, Rho]
+    return [L, Lq, W, Wq, Rho]
 
 
 def intervalo_confianca(data, conf_level, sample_size):
