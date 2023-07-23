@@ -90,11 +90,18 @@ def geo(p, k):
 
 
 def valor_analitico(lambda_, mu_):
-    W = 1/(mu_-lambda_)
-    Wq = W - (1/mu_)
-    L = lambda_*W
-    Lq = lambda_*Wq
-    Rho = lambda_/mu_
+    if lambda_ < mu_:
+        W = 1/(mu_-lambda_)
+        Wq = W - (1/mu_)
+        L = lambda_*W
+        Lq = lambda_*Wq
+    else:
+        W = float('inf')
+        Wq = float('inf')
+        L = float('inf')
+        Lq = float('inf')
+
+    Rho = min(1, lambda_/mu_)
 
     return [L, Lq, W, W, Rho]
 
