@@ -89,7 +89,7 @@ def geo(p, k):
 def valor_analitico(lambda_, mu_):
     if lambda_ < mu_:
         W = 1/(mu_-lambda_)
-        Wq = lambda_/(mu_*(mu_-lambda_))
+        Wq = Wq = W - (1/mu_)
         L = lambda_*W
         Lq = lambda_*Wq
     else:
