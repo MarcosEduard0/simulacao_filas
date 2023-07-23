@@ -1,6 +1,7 @@
 import numpy as np
 import math
 from collections import Counter
+import pandas as pd
 
 
 def simulador(lambda_=1, mi_=2, tempo_total_simulacao=10000, deterministico=False):
@@ -10,26 +11,35 @@ def simulador(lambda_=1, mi_=2, tempo_total_simulacao=10000, deterministico=Fals
     exponential = (lambda mi: 1 / mi) if deterministico else (
         lambda mi: np.random.exponential(scale=1 / mi))
 
+    trace = {'Numero de clientes na fila': [],
+             'Evento': [],
+             'Tempo': [],
+             }
     while tempo_simulacao < tempo_total_simulacao:
         tempo_chegada = np.random.exponential(scale=1 / lambda_)
         tempo_saida = exponential(mi_)
         last_event_time = tempo_simulacao
 
         if n == 0 or tempo_chegada < tempo_saida:
-            if n == 0:
-                freq_clientes.append(len(clientes_fila))
-
             tempo_simulacao += tempo_chegada
             num_chegadas += 1
             tempo_clientes_sistema.append(
                 (tempo_simulacao - last_event_time) * n)
-            chegadas.append(tempo_simulacao)
-            n += 1
 
+            chegadas.append(tempo_simulacao)
+
+            if n == 0:
+                freq_clientes.append(len(clientes_fila))
+
+            n += 1
             if n > 1:
                 clientes_fila.append(tempo_simulacao)
                 tempo_ocupado_servidor += tempo_chegada
                 freq_clientes.append(len(clientes_fila))
+
+            trace['Numero de clientes na fila'].append(n)
+            trace['Evento'].append('Chegada')
+            trace['Tempo'].append(tempo_simulacao)
 
         else:
             tempo_simulacao += tempo_saida
@@ -43,6 +53,10 @@ def simulador(lambda_=1, mi_=2, tempo_total_simulacao=10000, deterministico=Fals
             tempo_espera_sistema.append(tempo_simulacao - chegadas.pop(0))
             tempo_ocupado_servidor += tempo_saida
             n -= 1
+
+            trace['Numero de clientes na fila'].append(n)
+            trace['Evento'].append('Saida')
+            trace['Tempo'].append(tempo_simulacao)
 
     soma_tempo_clientes_fila = sum(tempo_clientes_fila)
     soma_tempo_clientes_sistema = sum(tempo_clientes_sistema)
@@ -68,9 +82,14 @@ def simulador(lambda_=1, mi_=2, tempo_total_simulacao=10000, deterministico=Fals
         'Lq': Lq,
         'rho': rho,
         'pi': pi,
+        'trace': pd.DataFrame(trace)
     }
 
     return results
+
+
+result = simulador(
+    lambda_=1, mi_=2, tempo_total_simulacao=100000, deterministico=False)
 
 
 def get_z_score(confidence_level):
